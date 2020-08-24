@@ -1,0 +1,16 @@
+{
+  "name": "designerlib",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncp ./node_modules/@grapecity/ar-viewer/dist ../wwwroot/activereports && ncp ./node_modules/@grapecity/ar-designer/dist ../wwwroot/activereports"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grapecity/ar-designer": "^14.1.1543",
+    "@grapecity/ar-viewer": "^14.1.2460",
+    "ncp": "^2.0.0"
+  }
+}

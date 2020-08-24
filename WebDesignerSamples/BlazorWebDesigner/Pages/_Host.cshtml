@@ -1,0 +1,65 @@
+﻿@page "/"
+@namespace BlazorWebDesigner.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlazorWebDesigner</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="~/activereports/vendor/css/materialdesignicons.min.css" media="all" type="text/css" />
+    <link rel="stylesheet" href="~/activereports/vendor/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/activereports/vendor/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/activereports/vendor/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/activereports/vendor/css/fonts-googleapis.css" type="text/css" />
+    <link rel="stylesheet" href="~/activereports/file-dialog.css" />
+    <link rel="stylesheet" href="~/activereports/data-set-picker.css" />
+    <link rel="stylesheet" href="~/activereports/file-view.css" />
+    <link rel="stylesheet" href="~/activereports/viewer-container.css" />
+    <link rel="stylesheet" href="~/activereports/ar-datasource-editor.css" />
+    <link rel="stylesheet" href="~/activereports/web-designer.css" />
+    <script>
+        window.initDesigner = function (designerId) {
+            var designerOptions = window.GrapeCity.ActiveReports.WebDesigner.createDesignerOptions(baseServerApi);
+            window.GrapeCity.ActiveReports.WebDesigner.renderApplication(designerId, designerOptions);
+        }
+    </script>
+
+
+</head>
+<body>
+
+    <script src="~/activereports/vendor/js/jquery.min.js"></script>
+    <script src="~/activereports/vendor/js/bootstrap.min.js"></script>
+    <script src="~/activereports/baseServerApi.js"></script>
+    <script src="~/activereports/file-dialog.js"></script>
+    <script src="~/activereports/data-set-picker.js"></script>
+    <script src="~/activereports/file-view.js"></script>
+    <script src="~/activereports/viewer-container.js"></script>
+    <script src="~/activereports/ar-datasource-editor.js"></script>
+    <script src="~/activereports/web-designer.js"></script>
+
+
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>
