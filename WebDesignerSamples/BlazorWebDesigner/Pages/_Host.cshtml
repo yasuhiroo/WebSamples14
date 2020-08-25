@@ -24,8 +24,35 @@
     <link rel="stylesheet" href="~/activereports/ar-datasource-editor.css" />
     <link rel="stylesheet" href="~/activereports/web-designer.css" />
     <script>
-        window.initDesigner = function (designerId) {
+        window.initDesigner = function (designerId, fileViewId) {
             var designerOptions = window.GrapeCity.ActiveReports.WebDesigner.createDesignerOptions(baseServerApi);
+            designerOptions.openFileView = function (options) {
+                $(`#${designerId}`).hide();
+                $(`#${fileViewId}`).show();
+                
+
+                var fileViewOptions = $.extend({}, options, {
+                    onClose: function () {
+                        if (options.onClose) options.onClose();
+                        $(`#${fileViewId}`).hide();
+                        $(`#${designerId}`).show();
+                    },
+                    serverApi: {
+                        getReportsList: baseServerApi.getReportsList,
+                        getReportRevisions: baseServerApi.getReportRevisions,
+                        getDataSetsList: baseServerApi.getDataSetsList,
+                        getTemplatesList: baseServerApi.getTemplatesList,
+                        getTemplateContent: baseServerApi.getTemplateContent,
+                        getTemplateThumbnail: baseServerApi.getTemplateThumbnail,
+                    },
+                    createReport: GrapeCity.ActiveReports.WebDesigner.api.createReport,
+                    openReport: GrapeCity.ActiveReports.WebDesigner.api.openReport,
+                    saveReport: GrapeCity.ActiveReports.WebDesigner.api.saveReport,
+                });
+
+                fileView.renderFileView(fileViewId, fileViewOptions);
+            };
+
             window.GrapeCity.ActiveReports.WebDesigner.renderApplication(designerId, designerOptions);
         }
     </script>

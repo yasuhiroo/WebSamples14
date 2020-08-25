@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using BlazorWebDesigner.ResourcesService;
 using GrapeCity.ActiveReports.Aspnetcore.Designer;
 using GrapeCity.ActiveReports.Aspnetcore.Viewer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,19 +37,15 @@ namespace BlazorWebDesigner
             {
                 app.UseExceptionHandler("/Error");
             }
-            
-            var resourcesService = new SQLiteResourcesService(Path.Combine(env.ContentRootPath, "Data", "reports.db"));
+
+            var resourcesRootDirectory = new DirectoryInfo(Path.Combine(env.ContentRootPath, "Reports"));
+         
 
             app.UseDesigner(config => {
-                config.UseCustomStore(resourcesService);
+                config.UseFileStore(resourcesRootDirectory, false);
             });
 
-            //app.UseReporting(config => config.UseFileStore(ResourcesRootDirectory));
-            app.UseReporting(config => config.UseCustomStore((reportId) =>
-            {
-                var rep = resourcesService.GetReport(reportId);
-                return rep;
-            }));
+            app.UseReporting(config => config.UseFileStore(resourcesRootDirectory));
 
 
             app.UseStaticFiles();
